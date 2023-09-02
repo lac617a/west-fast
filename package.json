@@ -14,9 +14,28 @@
     "@types/react-dom": "18.2.7",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "native-piece": "^2.0.3",
     "next": "13.4.19",
+    "random-words": "^2.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.2.2"
+    "react-fade-in": "^2.0.1",
+    "react-type-animation": "^3.1.0",
+    "typescript": "5.2.2",
+    "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "standard": "17.1.0"
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "printWidth": 80,
+    "endOfLine": "auto",
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "trailingComma": "none",
+    "bracketSameLine": false
   }
 }
