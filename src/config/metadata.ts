@@ -23,7 +23,7 @@ const METADATA: Metadata = {
     title: APP_NAME,
     description: DESCRIPTION,
     card: 'summary_large_image',
-    images: 'https://yoydev.com/assets/about-me-d8901b55.png'
+    images: 'https://i.ibb.co/R32xpDp/West-Fast.png'
   },
   openGraph: {
     type: 'website',
@@ -31,7 +31,7 @@ const METADATA: Metadata = {
     title: APP_NAME,
     siteName: APP_NAME,
     description: DESCRIPTION,
-    images: 'https://yoydev.com/assets/about-me-d8901b55.png'
+    images: 'https://i.ibb.co/R32xpDp/West-Fast.png'
   }
 }
 
