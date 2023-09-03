@@ -2,6 +2,10 @@
   "name": "west-fast",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Dominyel",
+    "url": "https://yoydev.com/"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -36,5 +40,16 @@
     "bracketSpacing": true,
     "trailingComma": "none",
     "bracketSameLine": false
+  },
+  "homepage": "https://west-fast.vercel.app/",
+  "bugs": {
+    "url": "https://github.com/lac617a/west-fast/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lac617a/west-fast.git"
+  },
+  "engines": {
+    "node": ">= 16"
   }
 }
