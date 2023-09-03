@@ -6,7 +6,7 @@ export function useTypingSpeedResults() {
   const setTimer = useTypingStore(state => state.setTimer)
   const setWordsLength = useTypingStore(state => state.setWordsLength)
 
-  const totalWordsTyped = words.length
+  const totalWordsTyped = words.writeLength
   const totalCharsTyped = words.correct + words.incorrect
   const timeUsedByUser = CALC_MINUTES - options.currentTimer
 

@@ -1,25 +1,35 @@
-import { useState, KeyboardEvent } from 'react'
+import { useEffect, useState, KeyboardEvent, useMemo } from 'react'
 import useTypingStore from '@/stores/useTyping'
 import utils from '@/utils'
+import { STATUS_TYPING } from '@/constants'
+
+const hasDanger = 'tst-has-danger'
+const hasSuccess = 'tst-has-success'
 
 export function useTypingSpeed() {
   const { options, words } = useTypingStore()
   const setCurrentStatus = useTypingStore(state => state.setCurrentStatus)
+  const deleteWordsOfList = useTypingStore(state => state.deleteWordsOfList)
+  const resetStore = useTypingStore(state => state.reset)
   const incrementCorretWord = useTypingStore(state => state.incrementCorretWord)
   const decrementCorretWord = useTypingStore(state => state.decrementCorretWord)
+  const setWordsWriteLength = useTypingStore(state => state.setWordsWriteLength)
 
+  const [currWordIndex] = useState<number>(0)
   const [currChar, setCurrChar] = useState<string>('')
   const [currInput, setCurrInput] = useState<string>('')
-  const [currWordIndex, setCurrWordIndex] = useState<number>(0)
   const [currCharIndex, setCurrCharIndex] = useState<number>(-1)
+
+  const isCurrentTimer = useMemo(
+    () => (options.currentTimer >= 1 ? hasSuccess : hasDanger),
+    [options.currentTimer]
+  )
 
   const handleKeyDown = ({ keyCode, key }: KeyboardEvent<HTMLInputElement>) => {
     const kcode = keyCode
     // space bar
     if (kcode === 32) {
-      setCurrInput('')
-      setCurrWordIndex(currWordIndex + 1)
-      setCurrCharIndex(-1)
+      handleSpaceBar()
       // backspace
     } else if (kcode === 8) {
       setCurrCharIndex(currCharIndex - 1)
@@ -36,6 +46,21 @@ export function useTypingSpeed() {
     }
   }
 
+  const handleSpaceBar = () => {
+    wordsToMatch()
+    setCurrInput('')
+    // setCurrWordIndex(currWordIndex + 1)
+    setCurrCharIndex(-1)
+  }
+
+  const wordsToMatch = () => {
+    const wordsList = words.list
+    const wordToCompare = wordsList[currWordIndex]
+    const doesItMatch = wordToCompare === currInput.trim()
+    if (doesItMatch) setWordsWriteLength()
+    deleteWordsOfList(currWordIndex)
+  }
+
   const charsToMatch = (key: string, max: number) => {
     const charsToCompare = words.list[currWordIndex]?.[currCharIndex + max]
     const doesItMatch = charsToCompare === key
@@ -48,8 +73,6 @@ export function useTypingSpeed() {
   }
 
   const getCharClass = (wordIdx: number, charIdx: number, char: string) => {
-    const hasDanger = 'tst-has-danger'
-    const hasSuccess = 'tst-has-success'
     if (
       currChar &&
       wordIdx === currWordIndex &&
@@ -73,15 +96,35 @@ export function useTypingSpeed() {
     if (isString) setCurrInput(value)
   }
 
+  useEffect(() => {
+    if (options.status === 'finished') {
+      setCurrInput(
+        isCurrentTimer === 'tst-has-success'
+          ? STATUS_TYPING[1]
+          : STATUS_TYPING[0]
+      )
+    }
+  }, [isCurrentTimer, options.status])
+
+  useEffect(() => {
+    if (options.status === 'pending') {
+      setCurrChar('')
+      setCurrInput('')
+      setCurrCharIndex(-1)
+    }
+  }, [options.status])
+
   return {
     words,
     options,
     currChar,
     currInput,
+    resetStore,
     setCurrInput,
     charsToMatch,
     getCharClass,
     handleKeyDown,
+    isCurrentTimer,
     handleOnChange
   }
 }

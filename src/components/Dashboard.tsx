@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-// import FadeIn from 'react-fade-in'
 import { Box, Button, Stack, Typography, VStack } from 'native-piece'
 
+import utils from '@/utils'
 import InputField from './Input'
 import CountDownTimer from './CountDownTimer'
 import { useTypingSpeedResults } from '@/hooks/useTypingSpeedResults'
+
 import GearIcon from '@/assets/gear.png'
-import utils from '@/utils'
 
 const Dashboard = () => {
   const [seconds, setSeconds] = useState<number>(20)
@@ -25,10 +25,11 @@ const Dashboard = () => {
   const handleOnAccep = () => {
     setTimer(seconds)
     setWordsLength(wordLength)
+    setShowGear(false)
   }
 
   return (
-    <Box maxWidth='max-content' marginInline='auto'>
+    <Box position='relative' maxWidth='max-content' marginInline='auto'>
       <Stack className='tst-round' zIndex={2}>
         <Box marginRight='4rem'>
           <CountDownTimer />
@@ -63,74 +64,57 @@ const Dashboard = () => {
             <Image src={GearIcon} width={24} height={24} alt='gear' />
           </Button>
         </Stack>
+        <Box className={`tst-round tst-gear ${showGear ? 'visible' : 'hidden'}`}>
+          <VStack gap='1rem'>
+            <InputField
+              name='seconds'
+              label='Segundos'
+              minLength={10}
+              maxLength={1000}
+              pattern='^[0-9]*'
+              value={seconds}
+              className='tst-input-chars'
+              placeholder='Desde (10) hasta (1000)'
+              style={{ padding: 0, textAlign: 'center' }}
+              helperText='El mínimo de segundos es (10) hasta (1000)'
+              onChange={(e) => {
+                const value = e.target.value
+                if (value === '') setSeconds(0)
+                if (utils.isNumber(value) && value.length <= 4) {
+                  setSeconds(Number(value))
+                }
+              }}
+            />
+            <InputField
+              name='words'
+              label='Palabras'
+              minLength={10}
+              maxLength={200}
+              pattern='^[0-9]*'
+              value={wordLength}
+              className='tst-input-chars'
+              style={{ padding: 0, textAlign: 'center' }}
+              helperText='Máximo de palabras'
+              placeholder='Máximo de palabras'
+              onChange={(e) => {
+                const value = e.target.value
+                if (value === '') setWordLength(0)
+                if (utils.isNumber(value) && value.length <= 4) {
+                  setWordLength(Number(value))
+                }
+              }}
+            />
+            <VStack>
+              <Button
+                className='tst-btn primary'
+                onClick={handleOnAccep}
+              >
+                Aceptar
+              </Button>
+            </VStack>
+          </VStack>
+        </Box>
       </Stack>
-      <Box
-        className='tst-round'
-        position='absolute'
-        bottom={-220}
-        zIndex={1}
-        transition='300ms'
-        borderRadius='0 12px 12px 12px'
-        visibility={showGear ? 'visible' : 'hidden'}
-        boxShadow='0px 0px 10px -4px rgba(0, 0, 0, .3)'
-      >
-        <Stack gap='1rem' justifyContent='space-between'>
-          <InputField
-            name='seconds'
-            label='Segundos'
-            minLength={10}
-            maxLength={1000}
-            pattern='^[0-9]*'
-            value={seconds}
-            placeholder='Desde (10) hasta (1000)'
-            helperText='El mínimo de segundos es (10) hasta (1000)'
-            onChange={(e) => {
-              const value = e.target.value
-              console.log({ value })
-              if (value === '') setSeconds(0)
-              if (utils.isNumber(value) && value.length <= 4) {
-                setSeconds(Number(value))
-              }
-            }}
-          />
-          <InputField
-            name='words'
-            label='Palabras'
-            minLength={10}
-            maxLength={200}
-            pattern='^[0-9]*'
-            value={wordLength}
-            helperText='Máximo de palabras para escribir'
-            placeholder='Máximo de palabras para escribir'
-            onChange={(e) => {
-              const value = e.target.value
-              if (value === '') setWordLength(0)
-              if (utils.isNumber(value) && value.length <= 4) {
-                setWordLength(Number(value))
-              }
-            }}
-          />
-          {/* <FadeIn
-            visible={showGear}
-            wrapperTag={(props) => <Stack gap='1rem' width='100%' {...props} />}
-          >
-          </FadeIn> */}
-        </Stack>
-        <Stack justifyContent='flex-end' gap='1rem'>
-          <Button
-            className='tst-btn danger'
-            onClick={() => setShowGear(false)}
-          >
-            Cancelar
-          </Button>
-          <Button
-            className='tst-btn primary'
-            onClick={handleOnAccep}
-          >
-            Aceptar
-          </Button>
-        </Stack>
-      </Box>
     </Box>
   )
 }

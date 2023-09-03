@@ -1,8 +1,10 @@
-import './globals.css'
+import '../src/styles/globals.css'
 import React from 'react'
 import type { Metadata } from 'next'
 import { Jost } from 'next/font/google'
+
 import METADATA from '@/config/metadata'
+import LayoutFooter from '@/layouts/Footer'
 
 const jost = Jost({
   display: 'swap',
@@ -21,7 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={jost.className}>{children}</body>
+      <body className={jost.className}>
+        {children}
+        <LayoutFooter />
+      </body>
     </html>
   )
 }

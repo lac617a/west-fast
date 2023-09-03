@@ -15,7 +15,7 @@ const InputField: FC<Props> = (props) => {
       <label className='tst-input-label' htmlFor={name}>{label}</label>
       <input {...rest} className={classNames} id={name} />
       {helperText && (
-        <Typography>{helperText}</Typography>
+        <Typography fontSize={12}>{helperText}</Typography>
       )}
     </VStack>
   )

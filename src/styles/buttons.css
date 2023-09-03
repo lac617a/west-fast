@@ -1,0 +1,23 @@
+.tst-btn {
+  padding: 12px;
+  border-radius: 12px;
+  background-color: #FFF;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: transform 200ms ease-in, box-shadow 150ms;
+}
+
+.tst-btn.primary {
+  color: var(--color-primary)
+}
+
+.tst-btn.danger {
+  color: var(--color-danger)
+}
+
+.tst-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px -4px rgba(0,0,0,.3);
+}

@@ -1,3 +1,5 @@
+import { generate } from 'random-words'
+
 class Utils {
   private pattern_only_string = /^[A-Z a-z]+$/
   private pattern_only_number = /^[0-9]+$/
@@ -15,6 +17,12 @@ class Utils {
   classNames(...classes: (string | Boolean)[]) {
     return classes.filter(Boolean).join(' ')
   }
+
+  generateWords = (length: number) =>
+    new Array(length)
+      .fill(null)
+      .map(() => generate())
+      .flat()
 }
 
 const utils = new Utils()
