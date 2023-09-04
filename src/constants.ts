@@ -9,3 +9,6 @@ export const STATUS_TYPING = [
   '!Usp vuelve a intentarlo',
   '!Wow has ganado, sigue así'
 ]
+
+export const HAS_DANGER = 'tst-has-danger'
+export const HAS_SUCCESS = 'tst-has-success'

@@ -1,22 +1,17 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Box, Button, Heading, Stack } from 'native-piece'
 
+import TypingBox from './TypingBox'
 import { useTypingSpeed } from '@/hooks/useTypingSpeed'
-import InputField from './Input'
-import Character from './Character'
 
 const TypingSpeed = () => {
   const {
-    words,
     options,
     currChar,
-    currInput,
     resetStore,
-    getCharClass,
     charsToMatch,
-    handleKeyDown,
-    isCurrentTimer,
-    handleOnChange
+    getCharClass,
+    handleKeyDown
   } = useTypingSpeed()
 
   return (
@@ -39,36 +34,7 @@ const TypingSpeed = () => {
           <Heading className='tst-heading'>{currChar}</Heading>
         </Stack>
       )}
-      <Box marginTop={20} position='sticky' top={0}>
-        <InputField
-          type='text'
-          value={currInput}
-          pattern='^[a-z A-Z]*'
-          onKeyDown={handleKeyDown}
-          placeholder='Empezar a escribir'
-          disabled={options.status === 'finished'}
-          className={`tst-input-chars ${isCurrentTimer}`}
-          onChange={(e) => handleOnChange(e.target.value.toLowerCase())}
-        />
-      </Box>
-      <Box>
-        {words.list.map((word, i) => (
-          <Fragment key={i}>
-            <Box display='inline-block' data-word={word}>
-              {word.split('').map((char, idx) => (
-                <Character
-                  key={idx}
-                  index={i}
-                  idx={idx}
-                  character={char}
-                  getCharClass={getCharClass}
-                />
-              ))}
-            </Box>
-            &nbsp;
-          </Fragment>
-        ))}
-      </Box>
+      <TypingBox charClass={getCharClass} onKeyDown={handleKeyDown} />
     </Box>
   )
 }
