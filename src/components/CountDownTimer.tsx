@@ -3,6 +3,7 @@ import { Box, VStack } from 'native-piece'
 
 import Timer from './Timer'
 import useTypingStore from '@/stores/useTyping'
+import { TIME } from '@/constants'
 
 const CountDownTimer = () => {
   const { options } = useTypingStore()
@@ -22,7 +23,7 @@ const CountDownTimer = () => {
       </svg>
       <Box className='tst-timer'>
         <Timer />
-        segundos
+        {TIME[0]}
       </Box>
     </VStack>
   )
