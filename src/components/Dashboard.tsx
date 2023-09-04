@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [wordLength, setWordLength] = useState<number>(20)
 
   const {
+    options,
     setTimer,
     setWordsLength,
     calculateCharsScore,
@@ -39,13 +40,13 @@ const Dashboard = () => {
             <Typography className='tst-metric'>
               {calculateWordsScore()}
             </Typography>
-            words/min
+            words/{options.time}
           </VStack>
           <VStack alignItems='center'>
             <Typography className='tst-metric'>
               {calculateCharsScore()}
             </Typography>
-            chars/min
+            chars/{options.time}
           </VStack>
           <VStack alignItems='center'>
             <Typography className='tst-metric'>
