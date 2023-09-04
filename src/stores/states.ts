@@ -3,6 +3,10 @@ import { State } from './types'
 import { TIMER_INIT } from '@/constants'
 
 const initialState: State = {
+  input: {
+    text: '',
+    length: 0
+  },
   words: {
     correct: 0,
     incorrect: 0,

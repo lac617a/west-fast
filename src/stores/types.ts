@@ -1,4 +1,8 @@
 export type State = {
+  input: {
+    text: string
+    length: number
+  }
   words: {
     list: string[]
     length: number
@@ -14,6 +18,9 @@ export type State = {
 }
 export type Actions = {
   reset: () => void
+  //! ==========INPUTS==========
+  setInputText: (status: State['input']['text']) => void
+  setInputLength: (status: State['input']['length']) => void
   //! ==========OPTIONS==========
   setCurrentTimer: (timer: number) => void
   setTimer: (status: State['options']['timer']) => void
