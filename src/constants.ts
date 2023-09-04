@@ -10,5 +10,7 @@ export const STATUS_TYPING = [
   '!Wow has ganado, sigue así'
 ]
 
+export const TIME = ['segundos', 'minutos']
+
 export const HAS_DANGER = 'tst-has-danger'
 export const HAS_SUCCESS = 'tst-has-success'
