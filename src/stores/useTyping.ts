@@ -17,7 +17,10 @@ const useTypingStore = create<Props>(set => ({
   setInputLength: length =>
     set(state => ({ input: { ...state.input, length } })),
   //! ==========OPTIONS==========
-  setTimer: timer => set(state => ({ options: { ...state.options, timer } })),
+  setTimer: timer =>
+    set(state => ({
+      options: { ...state.options, timer, time: timer >= 60 ? 'min' : 'seg' }
+    })),
   setCurrentStatus: status =>
     set(state => ({ options: { ...state.options, status } })),
   setCurrentTimer: currentTimer =>

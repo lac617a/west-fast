@@ -12,6 +12,7 @@ export type State = {
   }
   options: {
     timer: number
+    time: 'seg' | 'min'
     currentTimer: number
     status: 'pending' | 'started' | 'finished'
   }

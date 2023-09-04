@@ -15,6 +15,7 @@ const initialState: State = {
     list: utils.generateWords(TIMER_INIT)
   },
   options: {
+    time: 'seg',
     status: 'pending',
     timer: TIMER_INIT,
     currentTimer: TIMER_INIT
