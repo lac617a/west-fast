@@ -42,8 +42,8 @@ export function useTypingSpeedResults() {
   return {
     words,
     options,
-    setWordsLength,
     setTimer,
+    setWordsLength,
     calculateWordsScore,
     calculateCharsScore,
     calculateAccurancyScore
